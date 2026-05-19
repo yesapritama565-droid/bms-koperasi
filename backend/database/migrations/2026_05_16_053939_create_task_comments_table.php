@@ -12,20 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('task_comments', function (Blueprint $table) {
-    $table->id();
+            $table->id();
 
-    $table->foreignId('task_id')
-          ->constrained()
-          ->onDelete('cascade');
+            $table->foreignId('task_id')
+                  ->constrained()
+                  ->onDelete('cascade');
 
-    $table->foreignId('user_id')
-          ->constrained()
-          ->onDelete('cascade');
+            $table->foreignId('user_id')
+                  ->constrained()
+                  ->onDelete('cascade');
 
-    $table->text('comment');
+            $table->text('comment');
 
-    $table->timestamps();
-});
+            $table->timestamps();
+        });
     }
 
     /**
@@ -36,3 +36,6 @@ return new class extends Migration
         Schema::dropIfExists('task_comments');
     }
 };
+
+
+

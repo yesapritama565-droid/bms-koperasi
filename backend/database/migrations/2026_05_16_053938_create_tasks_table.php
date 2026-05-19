@@ -11,38 +11,49 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('tasks', function (Blueprint $table) {
-    $table->id();
+        Schema::create('tasks', function (Blueprint $table) {
 
-    $table->foreignId('project_id')
-          ->constrained()
-          ->onDelete('cascade');
+            $table->id();
 
-    $table->foreignId('assigned_to')
-          ->references('id')
-          ->on('users')
-          ->onDelete('cascade');
+            $table->foreignId('project_id')
+                  ->constrained()
+                  ->onDelete('cascade');
 
-    $table->string('title');
+            $table->foreignId('assigned_to')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
 
-    $table->text('description')->nullable();
+            $table->string('title');
 
-    $table->enum('priority', [
-        'low',
-        'medium',
-        'high'
-    ])->default('medium');
+            $table->text('description')->nullable();
 
-    $table->enum('status', [
-        'todo',
-        'progress',
-        'done'
-    ])->default('todo');
+            $table->enum('priority', [
+                'low',
+                'medium',
+                'high'
+            ])->default('medium');
 
-    $table->date('deadline')->nullable();
+            $table->enum('status', [
+                'todo',
+                'progress',
+                'done'
+            ])->default('todo');
 
-    $table->timestamps();
-});
+            // TAMBAHAN BARU
+            $table->integer('progress')->default(0);
+
+            $table->date('deadline')->nullable();
+
+            // TIMER TASK
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('finished_at')->nullable();
+
+            // UPLOAD FILE
+            $table->string('attachment')->nullable();
+
+            $table->timestamps();
+        });
     }
 
     /**
