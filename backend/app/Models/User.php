@@ -12,19 +12,19 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-   use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-   protected $fillable = [
-    'role_id',
-    'name',
-    'email',
-    'password',
-];
+    protected $fillable = [
+        'role_id',
+        'name',
+        'email',
+        'password',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,5 +47,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function taskComments()
+    {
+        return $this->hasMany(TaskComment::class);
+    }
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class);
+    }
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+    public function meetingNotes()
+    {
+        return $this->hasMany(MeetingNote::class);
+    }
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class);
     }
 }

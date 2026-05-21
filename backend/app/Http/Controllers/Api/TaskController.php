@@ -9,70 +9,82 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     // tampil semua task
-   public function index()
+    public function index(Request $request)
 {
-    $tasks = Task::with([
+    return Task::with([
         'assignedToUser',
         'project',
         'comments'
-    ])->latest()->get();
-
-    return response()->json($tasks);
+    ])
+    ->when($request->status, function ($q) use ($request) {
+        $q->where('status', $request->status);
+    })
+    ->latest()
+    ->get();
 }
-
     // tambah task
-   public function store(Request $request)
-{
-    $request->validate([
-        'project_id' => 'required',
-        'assigned_to' => 'required',
-        'title' => 'required',
-        'status' => 'required'
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'project_id' => 'required',
+            'assigned_to' => 'required',
+            'title' => 'required',
+            'status' => 'required'
+        ]);
 
-    $task = Task::create([
+        $task = Task::create([
 
-        'project_id' => $request->project_id,
+            'project_id' => $request->project_id,
 
-        'assigned_to' => $request->assigned_to,
+            'assigned_to' => $request->assigned_to,
 
-        'title' => $request->title,
+            'title' => $request->title,
 
-        'description' => $request->description,
+            'description' => $request->description,
 
-        'priority' => $request->priority,
+            'priority' => $request->priority,
 
-        'status' => $request->status,
+            'status' => $request->status,
 
-        'progress' => $request->progress ?? 0,
+            'progress' => $request->progress ?? 0,
 
-        'deadline' => $request->deadline,
-    ]);
+            'deadline' => $request->deadline,
+        ]);
 
-    return response()->json([
-        'message' => 'Task berhasil dibuat',
-        'task' => $task
-    ]);
-}
+        return response()->json([
+            'message' => 'Task berhasil dibuat',
+            'task' => $task
+        ]);
+    }
     // detail task
     public function show(string $id)
-    {
-        return response()->json(Task::findOrFail($id));
-    }
+{
+    return Task::with([
+        'project',
+        'assignedToUser',
+        'comments'
+    ])->findOrFail($id);
+}
 
     // update task
     public function update(Request $request, string $id)
     {
         $task = Task::findOrFail($id);
 
-        $task->update($request->all());
+        $task->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+            'priority' => $request->priority,
+            'progress' => $request->progress,
+            'deadline' => $request->deadline,
+        ]);
 
         return response()->json([
             'message' => 'Task berhasil diupdate',
             'task' => $task
         ]);
     }
-
     // hapus task
     public function destroy(string $id)
     {

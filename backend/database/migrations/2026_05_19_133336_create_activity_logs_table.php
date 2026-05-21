@@ -11,26 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('task_comments', function (Blueprint $table) {
+        Schema::create('activity_logs', function (Blueprint $table) {
 
             $table->id();
 
-            // relasi task
-            $table->foreignId('task_id')
-                ->constrained()
-                ->onDelete('cascade');
-
-            // user komentar
+            // user yang melakukan aktivitas
             $table->foreignId('user_id')
                 ->constrained()
                 ->onDelete('cascade');
 
-            // isi komentar
-            $table->text('comment');
+            // isi aktivitas
+            $table->string('activity');
 
-            // mark as decision
-            $table->boolean('is_decision')
-                ->default(false);
+            // optional detail tambahan
+            $table->text('description')->nullable();
 
             $table->timestamps();
         });
@@ -41,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('task_comments');
+        Schema::dropIfExists('activity_logs');
     }
 };

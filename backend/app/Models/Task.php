@@ -38,4 +38,8 @@ class Task extends Model
     {
         return $this->hasMany(TaskComment::class);
     }
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
 }

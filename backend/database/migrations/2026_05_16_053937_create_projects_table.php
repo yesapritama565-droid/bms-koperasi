@@ -18,6 +18,7 @@ return new class extends Migration
     $table->text('description')->nullable();
 
     $table->date('start_date')->nullable();
+    $table->text('goal')->nullable();
     $table->date('deadline')->nullable();
 
     $table->enum('status', [

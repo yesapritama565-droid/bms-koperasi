@@ -3,7 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import AdminDashboard from "../pages/Dashboard-Admin.vue"
-import UserDashboard from "../pages/Dashboard-user.vue"
+import UserDashboard from "../pages/Dashboard-User.vue"
+import KanbanBoard from "../pages/KanbanBoard.vue"
+import DailyActivity from "../pages/DailyActivity.vue";
 
 const routes = [
   {
@@ -30,6 +32,21 @@ const routes = [
     path: '/Dashboard-User',
     name: 'user-dashboard',
     component: UserDashboard,
+  },
+  {
+    path: "/tasks/:id",
+    name: "task-detail",
+    component: () => import("../pages/TaskDetail.vue"),
+  },
+  {
+    path: "/kanban",
+    name: "kanban",
+    component: KanbanBoard,
+  },
+  {
+    path: "/daily-activity",
+    name: "daily-activity",
+    component: () => import("../pages/DailyActivity.vue"),
   },
 ]
 

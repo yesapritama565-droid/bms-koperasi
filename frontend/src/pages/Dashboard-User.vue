@@ -11,9 +11,14 @@
                     <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
                         <span class="text-white font-bold text-lg">G</span>
                     </div>
+
                     <div>
-                        <p class="text-white font-bold text-sm leading-tight">Garuda Merah</p>
-                        <p class="text-white/60 text-xs">Putih Koperasi</p>
+                        <p class="text-white font-bold text-sm leading-tight">
+                            Garuda Merah
+                        </p>
+                        <p class="text-white/60 text-xs">
+                            Putih Koperasi
+                        </p>
                     </div>
                 </div>
             </div>
@@ -25,16 +30,19 @@
             </div>
 
             <nav class="flex-1 px-4 py-2 space-y-1 overflow-y-auto">
-                <p class="text-white/40 text-xs font-semibold uppercase px-3 mb-2 mt-2">Menu Saya</p>
-                <button
-                    v-for="item in menuItems" :key="item.name"
-                    @click="activeMenu = item.name"
+                <p class="text-white/40 text-xs font-semibold uppercase px-3 mb-2 mt-2">
+                    Menu Saya
+                </p>
+
+                <button v-for="item in menuItems" :key="item.name" @click="goToMenu(item.name)"
                     class="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200"
                     :class="activeMenu === item.name
-                        ? 'bg-white text-[#5B1E35] shadow-lg'
-                        : 'text-white/70 hover:bg-white/10 hover:text-white'">
+                            ? 'bg-white text-[#5B1E35] shadow-lg'
+                            : 'text-white/70 hover:bg-white/10 hover:text-white'
+                        ">
                     <span class="text-lg">{{ item.icon }}</span>
                     <span>{{ item.label }}</span>
+
                     <span v-if="item.badge"
                         class="ml-auto bg-[#E8B4C3] text-[#5B1E35] text-xs font-bold px-2 py-0.5 rounded-full">
                         {{ item.badge }}
@@ -44,18 +52,25 @@
 
             <div class="px-4 py-6 border-t border-white/10">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-white font-bold text-sm">
+                    <div
+                        class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-white font-bold text-sm">
                         {{ userInitial }}
                     </div>
+
                     <div class="flex-1 min-w-0">
-                        <p class="text-white text-sm font-semibold truncate">{{ user?.name }}</p>
-                        <p class="text-white/50 text-xs truncate">{{ user?.email }}</p>
+                        <p class="text-white text-sm font-semibold truncate">
+                            {{ user?.name }}
+                        </p>
+
+                        <p class="text-white/50 text-xs truncate">
+                            {{ user?.email }}
+                        </p>
                     </div>
-                    <button @click="logout" title="Logout"
-                        class="text-white/50 hover:text-white transition">
+
+                    <button @click="logout" title="Logout" class="text-white/50 hover:text-white transition">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
                     </button>
                 </div>
@@ -66,18 +81,24 @@
         <main class="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen">
 
             <!-- TOPBAR -->
-            <header class="bg-white border-b border-[#E8D0DA] px-6 py-4 flex items-center justify-between sticky top-0 z-20 shadow-sm">
+            <header
+                class="bg-white border-b border-[#E8D0DA] px-6 py-4 flex items-center justify-between sticky top-0 z-20 shadow-sm">
                 <div class="flex items-center gap-4">
                     <button @click="sidebarOpen = !sidebarOpen" class="md:hidden text-[#5B1E35]">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
+
                     <div>
                         <h1 class="text-xl font-bold text-[#5B1E35]">
                             Halo, {{ firstName }}! 👋
                         </h1>
-                        <p class="text-gray-400 text-xs">{{ currentDate }}</p>
+
+                        <p class="text-gray-400 text-xs">
+                            {{ currentDate }}
+                        </p>
                     </div>
                 </div>
             </header>
@@ -85,181 +106,289 @@
             <!-- LOADING -->
             <div v-if="loading" class="flex-1 flex items-center justify-center">
                 <div class="text-center">
-                    <div class="w-12 h-12 border-4 border-[#5B1E35] border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-                    <p class="text-[#5B1E35] font-medium text-sm">Memuat data...</p>
+                    <div
+                        class="w-12 h-12 border-4 border-[#5B1E35] border-t-transparent rounded-full animate-spin mx-auto mb-3">
+                    </div>
+
+                    <p class="text-[#5B1E35] font-medium text-sm">
+                        Memuat data...
+                    </p>
                 </div>
             </div>
 
             <!-- CONTENT -->
             <div v-else class="flex-1 p-6 space-y-6">
 
-                <!-- HERO CARD -->
-                <div class="bg-gradient-to-r from-[#5B1E35] to-[#8B3A62] rounded-2xl p-6 text-white flex items-center justify-between">
-                    <div>
-                        <p class="text-white/70 text-sm mb-1">Tugasmu hari ini</p>
-                        <h2 class="text-3xl font-bold mb-3">{{ stats.total }} Tugas</h2>
-                        <div class="flex items-center gap-3 flex-wrap">
-                            <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">
-                                ✅ {{ stats.selesai }} selesai
-                            </span>
-                            <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">
-                                🔄 {{ stats.on_progress }} berjalan
-                            </span>
-                            <span v-if="stats.terlambat > 0" class="bg-red-400/40 text-white text-xs px-3 py-1 rounded-full">
-                                ⚠️ {{ stats.terlambat }} terlambat
-                            </span>
+                <!-- HEADER DASHBOARD -->
+                <div class="bg-gradient-to-r from-[#5B1E35] to-[#8B3A62] rounded-3xl p-7 text-white shadow-lg">
+
+                    <div class="flex items-center justify-between flex-wrap gap-5">
+
+                        <div>
+                            <p class="text-white/70 text-sm mb-2">
+                                Dashboard Task Management
+                            </p>
+
+                            <h2 class="text-3xl font-bold mb-3">
+                                Monitoring Kinerja Tim
+                            </h2>
+
+                            <div class="flex gap-3 flex-wrap">
+
+                                <div class="bg-white/20 px-4 py-2 rounded-xl text-sm">
+                                    📋 {{ stats.total }} Total Tugas
+                                </div>
+
+                                <div class="bg-white/20 px-4 py-2 rounded-xl text-sm">
+                                    ✅ {{ stats.selesai }} Selesai
+                                </div>
+
+                                <div class="bg-white/20 px-4 py-2 rounded-xl text-sm">
+                                    ⏳ {{ stats.pending }} Pending
+                                </div>
+
+                                <div class="bg-white/20 px-4 py-2 rounded-xl text-sm">
+                                    ⚠️ {{ stats.terlambat }} Terlambat
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="hidden md:block text-7xl opacity-20">
+                            📊
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- CARD STATISTIK -->
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+
+                    <!-- TOTAL TASK -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
+
+                        <div class="flex items-center justify-between">
+
+                            <div>
+                                <p class="text-gray-400 text-sm">
+                                    Total Task
+                                </p>
+
+                                <h2 class="text-3xl font-bold text-[#3D1224] mt-2">
+                                    {{ stats.total }}
+                                </h2>
+                            </div>
+
+                            <div class="w-14 h-14 rounded-2xl bg-[#FCE7F3] flex items-center justify-center text-2xl">
+                                📋
+                            </div>
+
                         </div>
                     </div>
-                    <div class="text-6xl opacity-80 hidden md:block">📋</div>
+
+                    <!-- TASK SELESAI -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
+
+                        <div class="flex items-center justify-between">
+
+                            <div>
+                                <p class="text-gray-400 text-sm">
+                                    Task Selesai
+                                </p>
+
+                                <h2 class="text-3xl font-bold text-green-600 mt-2">
+                                    {{ stats.selesai }}
+                                </h2>
+                            </div>
+
+                            <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center text-2xl">
+                                ✅
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ON PROGRESS -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
+
+                        <div class="flex items-center justify-between">
+
+                            <div>
+                                <p class="text-gray-400 text-sm">
+                                    Sedang Berjalan
+                                </p>
+
+                                <h2 class="text-3xl font-bold text-blue-600 mt-2">
+                                    {{ stats.on_progress }}
+                                </h2>
+                            </div>
+
+                            <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">
+                                🔄
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- TERLAMBAT -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
+
+                        <div class="flex items-center justify-between">
+
+                            <div>
+                                <p class="text-gray-400 text-sm">
+                                    Task Terlambat
+                                </p>
+
+                                <h2 class="text-3xl font-bold text-red-500 mt-2">
+                                    {{ stats.terlambat }}
+                                </h2>
+                            </div>
+
+                            <div class="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center text-2xl">
+                                ⚠️
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- STATS MINI -->
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
-                        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-3 bg-[#FEF3F2]">📋</div>
-                        <p class="text-2xl font-bold text-[#3D1224]">{{ stats.total }}</p>
-                        <p class="text-gray-400 text-xs mt-1">Total Tugas</p>
-                    </div>
-                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
-                        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-3 bg-[#FFFBEB]">⏳</div>
-                        <p class="text-2xl font-bold text-[#3D1224]">{{ stats.pending }}</p>
-                        <p class="text-gray-400 text-xs mt-1">Pending</p>
-                    </div>
-                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
-                        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-3 bg-[#EFF6FF]">🔄</div>
-                        <p class="text-2xl font-bold text-[#3D1224]">{{ stats.on_progress }}</p>
-                        <p class="text-gray-400 text-xs mt-1">Sedang Berjalan</p>
-                    </div>
-                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
-                        <div class="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-3 bg-[#F0FDF4]">✅</div>
-                        <p class="text-2xl font-bold text-[#3D1224]">{{ stats.selesai }}</p>
-                        <p class="text-gray-400 text-xs mt-1">Selesai</p>
-                    </div>
-                </div>
-
-                <!-- TASKS + DEADLINE -->
+                <!-- ANALYTIC -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                    <!-- DAFTAR TUGAS SAYA -->
+                    <!-- PROGRESS TIM -->
                     <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-[#F0DDE5]">
-                        <div class="flex items-center justify-between mb-5">
-                            <h3 class="font-bold text-[#3D1224] text-lg">Tugas Saya</h3>
-                            <div class="flex gap-2">
-                                <button v-for="f in filterOptions" :key="f.value"
-                                    @click="activeFilter = f.value"
-                                    class="text-xs px-3 py-1.5 rounded-lg font-medium transition-all"
-                                    :class="activeFilter === f.value
-                                        ? 'bg-[#5B1E35] text-white'
-                                        : 'bg-[#F8EEF1] text-gray-500 hover:bg-[#E8D0DA]'">
-                                    {{ f.label }}
-                                </button>
+
+                        <div class="flex items-center justify-between mb-6">
+
+                            <div>
+                                <h3 class="font-bold text-[#3D1224] text-lg">
+                                    Progress Tim
+                                </h3>
+
+                                <p class="text-sm text-gray-400">
+                                    Monitoring capaian tugas anggota
+                                </p>
                             </div>
+
+                            <div class="bg-[#F8EEF1] px-4 py-2 rounded-xl text-sm text-[#5B1E35] font-semibold">
+                                {{ stats.selesai }}/{{ stats.total }} Task
+                            </div>
+
                         </div>
 
-                        <div v-if="filteredMyTasks.length === 0"
-                            class="text-center py-10 text-gray-400">
-                            <p class="text-3xl mb-2">📭</p>
-                            <p class="text-sm">Tidak ada tugas untuk filter ini</p>
-                        </div>
+                        <!-- BAR -->
+                        <div class="space-y-5">
 
-                        <div class="space-y-3">
-                            <div v-for="task in filteredMyTasks" :key="task.id"
-                                class="border border-[#F0DDE5] rounded-xl p-4 hover:border-[#C48CA8] transition-colors">
-                                <div class="flex items-start justify-between gap-3">
-                                    <div class="flex items-start gap-3 flex-1 min-w-0">
-                                        <!-- Checkbox update progress -->
-                                        <input type="checkbox"
-                                            :checked="task.status === 'selesai'"
-                                            @change="toggleDone(task)"
-                                            class="mt-1 w-4 h-4 accent-[#5B1E35] cursor-pointer flex-shrink-0"/>
-                                        <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-800 truncate"
-                                                :class="task.status === 'selesai' ? 'line-through text-gray-400' : ''">
-                                                {{ task.title }}
-                                            </p>
-                                            <div class="flex items-center gap-3 mt-1.5 flex-wrap">
-                                                <span class="text-xs text-gray-400">📁 {{ task.project || 'Tanpa project' }}</span>
-                                                <span class="text-xs text-gray-400" v-if="task.deadline">
-                                                    ⏰ {{ formatDate(task.deadline) }}
-                                                </span>
-                                                <span class="text-xs text-gray-400">{{ task.progress }}%</span>
-                                            </div>
-                                            <div class="mt-2 h-1.5 bg-[#F8EEF1] rounded-full overflow-hidden">
-                                                <div class="h-full rounded-full bg-gradient-to-r from-[#5B1E35] to-[#8B3A62] transition-all"
-                                                    :style="{ width: task.progress + '%' }"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs px-2.5 py-1 rounded-lg font-medium flex-shrink-0 capitalize"
-                                        :class="{
-                                            'bg-red-50 text-red-500': task.priority === 'tinggi',
-                                            'bg-yellow-50 text-yellow-600': task.priority === 'sedang',
-                                            'bg-green-50 text-green-600': task.priority === 'rendah',
-                                        }">
-                                        {{ task.priority }}
+                            <div>
+
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">
+                                        Penyelesaian Task
+                                    </span>
+
+                                    <span class="text-sm font-bold text-[#5B1E35]">
+                                        {{ stats.total ? Math.round((stats.selesai / stats.total) * 100) : 0 }}%
                                     </span>
                                 </div>
+
+                                <div class="h-4 bg-[#F8EEF1] rounded-full overflow-hidden">
+
+                                    <div class="h-full bg-gradient-to-r from-[#5B1E35] to-[#8B3A62] rounded-full transition-all duration-500"
+                                        :style="{
+                                            width: (stats.total
+                                                ? (stats.selesai / stats.total) * 100
+                                                : 0) + '%'
+                                        }">
+
+                                    </div>
+
+                                </div>
                             </div>
+
+                            <div>
+
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm text-gray-600">
+                                        Progress Project
+                                    </span>
+
+                                    <span class="text-sm font-bold text-blue-600">
+                                        {{ stats.on_progress * 10 }}%
+                                    </span>
+                                </div>
+
+                                <div class="h-4 bg-[#F8EEF1] rounded-full overflow-hidden">
+
+                                    <div class="h-full bg-blue-500 rounded-full transition-all duration-500" :style="{
+                                        width: (stats.on_progress * 10) + '%'
+                                    }">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
-                    <!-- PANEL KANAN -->
-                    <div class="space-y-5">
+                    <!-- PREDICTIVE ANALYTIC -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-[#F0DDE5]">
 
-                        <!-- Deadline Terdekat -->
-                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
-                            <h3 class="font-bold text-[#3D1224] mb-4">⏰ Deadline Terdekat</h3>
-                            <div v-if="upcomingDeadlines.length === 0"
-                                class="text-center py-4 text-gray-400 text-sm">Tidak ada deadline terdekat</div>
-                            <div class="space-y-3">
-                                <div v-for="task in upcomingDeadlines" :key="task.id"
-                                    class="flex items-center gap-3 p-2.5 rounded-xl"
-                                    :class="isUrgent(task.deadline) ? 'bg-red-50' : 'bg-[#F8EEF1]'">
-                                    <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm flex-shrink-0"
-                                        :class="isUrgent(task.deadline) ? 'bg-red-100' : 'bg-[#E8D0DA]'">
-                                        📌
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-xs font-semibold text-gray-700 truncate">{{ task.title }}</p>
-                                        <p class="text-xs font-bold mt-0.5"
-                                            :class="isUrgent(task.deadline) ? 'text-red-500' : 'text-[#5B1E35]'">
-                                            {{ formatDate(task.deadline) }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <h3 class="font-bold text-[#3D1224] text-lg mb-5">
+                            🤖 Predictive Analytic
+                        </h3>
 
-                        <!-- Update Progress -->
-                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#F0DDE5]">
-                            <h3 class="font-bold text-[#3D1224] mb-4">📊 Update Progress</h3>
-                            <div v-if="activeTasks.length === 0"
-                                class="text-center py-4 text-gray-400 text-sm">Tidak ada tugas aktif</div>
-                            <div class="space-y-4">
-                                <div v-for="task in activeTasks" :key="'p-' + task.id">
-                                    <div class="flex justify-between mb-1">
-                                        <p class="text-xs font-medium text-gray-700 truncate max-w-[160px]">{{ task.title }}</p>
-                                        <span class="text-xs font-bold text-[#5B1E35]">{{ task.progress }}%</span>
-                                    </div>
-                                    <input type="range" min="0" max="100"
-                                        :value="task.progress"
-                                        @change="updateProgress(task, $event.target.value)"
-                                        class="w-full accent-[#5B1E35] cursor-pointer h-1.5"/>
-                                </div>
+                        <div class="space-y-4">
+
+                            <div class="bg-[#F8EEF1] rounded-xl p-4">
+
+                                <p class="text-sm text-gray-500 mb-1">
+                                    Goal Mingguan
+                                </p>
+
+                                <p class="text-xl font-bold text-[#5B1E35]">
+                                    85%
+                                </p>
                             </div>
+
+                            <div class="bg-[#F8EEF1] rounded-xl p-4">
+
+                                <p class="text-sm text-gray-500 mb-1">
+                                    Estimasi Penyelesaian
+                                </p>
+
+                                <p class="text-xl font-bold text-green-600">
+                                    Tepat Waktu
+                                </p>
+                            </div>
+
+                            <div class="bg-[#F8EEF1] rounded-xl p-4">
+
+                                <p class="text-sm text-gray-500 mb-1">
+                                    Beban Tim
+                                </p>
+
+                                <p class="text-xl font-bold text-orange-500">
+                                    Sedang
+                                </p>
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
 
             </div>
         </main>
 
-        <!-- MOBILE OVERLAY -->
-        <div v-if="sidebarOpen" @click="sidebarOpen = false"
-            class="fixed inset-0 bg-black/50 z-20 md:hidden"></div>
+            <!-- MOBILE OVERLAY -->
+            <div v-if="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 bg-black/50 z-20 md:hidden"></div>
 
     </div>
 </template>
+
 
 <script>
 import api from "../services/api";
@@ -296,10 +425,64 @@ export default {
             }),
 
             menuItems: [
-                { name: "dashboard", label: "Dashboard", icon: "🏠", badge: null },
-                { name: "tasks", label: "Tugas Saya", icon: "✅", badge: null },
-                { name: "log", label: "Log Aktivitas", icon: "📊", badge: null },
+
+                {
+                    name: "dashboard",
+                    label: "Dashboard",
+                    icon: "🏠",
+                    badge: null
+                },
+
+                {
+                    name: "daily-activity",
+                    label: "Daily Activity",
+                    icon: "📋",
+                    badge: null
+                },
+
+                {
+                    name: "kanban",
+                    label: "Kanban Board",
+                    icon: "📌",
+                    badge: null
+                },
+
+                {
+                    name: "project",
+                    label: "Project",
+                    icon: "📁",
+                    badge: null
+                },
+
+                {
+                    name: "document",
+                    label: "Document Management",
+                    icon: "📂",
+                    badge: null
+                },
+
+                {
+                    name: "meeting",
+                    label: "Notulensi Meeting",
+                    icon: "📝",
+                    badge: null
+                },
+
+                {
+                    name: "announcement",
+                    label: "Blast / Pengumuman",
+                    icon: "📢",
+                    badge: null
+                },
+
+                {
+                    name: "log",
+                    label: "Log Aktivitas",
+                    icon: "📊",
+                    badge: null
+                },
             ],
+
         };
     },
 
@@ -314,7 +497,10 @@ export default {
         // Tugas milik user ini saja
         myTasks() {
             if (!this.user) return [];
-            return this.tasks.filter(t => t.assigned_to === this.user.id);
+
+            return this.tasks.filter(t => {
+                return Number(t.assigned_to) === Number(this.user.id);
+            });
         },
 
         // Filter berdasarkan tab
@@ -322,9 +508,14 @@ export default {
             if (this.activeFilter === "selesai") {
                 return this.myTasks.filter(t => t.status === "selesai");
             }
+
             if (this.activeFilter === "aktif") {
-                return this.myTasks.filter(t => t.status !== "selesai");
+                return this.myTasks.filter(t =>
+                    ["pending", "on_progress", "terlambat"].includes(t.status)
+                );
             }
+
+            // WAJIB ADA
             return this.myTasks;
         },
 
@@ -367,9 +558,46 @@ export default {
             }
         },
 
+        //-------kanban----------
+        goToMenu(name) {
+
+            this.activeMenu = name;
+
+            if (name === "dashboard") {
+                this.$router.push("/");
+            }
+
+            else if (name === "kanban") {
+                this.$router.push("/kanban");
+            }
+
+            else if (name === "daily-activity") {
+                this.$router.push("/daily-activity");
+            }
+
+            else if (name === "project") {
+                this.$router.push("/projects");
+            }
+
+            else if (name === "document") {
+                this.$router.push("/documents");
+            }
+
+            else if (name === "meeting") {
+                this.$router.push("/meeting-notes");
+            }
+
+            else if (name === "announcement") {
+                this.$router.push("/announcements");
+            }
+
+            else if (name === "log") {
+                this.$router.push("/activity-logs");
+            }
+        },
         // ─── HITUNG STATS DARI TUGAS SENDIRI ────────────────────────────
         computeStats() {
-            const mine = this.myTasks;
+            const mine = this.myTasks || [];
             this.stats.total = mine.length;
             this.stats.pending = mine.filter(t => t.status === "pending").length;
             this.stats.on_progress = mine.filter(t => t.status === "on_progress").length;
@@ -422,7 +650,7 @@ export default {
         async logout() {
             try {
                 await api.post("/logout");
-            } catch (_) {}
+            } catch (_) { }
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             this.$router.push("/login");
